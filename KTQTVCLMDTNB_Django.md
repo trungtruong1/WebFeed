@@ -67,18 +67,82 @@ api
 
 **`admin.py`**:
    - **Công dụng**: Quản lý và tùy chỉnh các mô hình trong trang quản trị Django.
+   - **Cú Pháp**: 
+```
+from django.contrib import admin
+from .models import MyModel
+
+admin.site.register(MyModel)
+```
 
 **`apps.py`**:
    - **Công dụng**: Cung cấp cấu hình và thông tin về ứng dụng Django của chúng ta.
+   - **Cú pháp**: 
+```
+from django.apps import AppConfig
+
+class MyAppConfig(AppConfig):
+    name = 'myapp'
+    verbose_name = 'My Application'
+```
 
 **`models.py`**:
    - **Công dụng**: Định nghĩa cấu trúc dữ liệu cho ứng dụng Django của chúng ta.
+   - **Cú pháp**: 
+```
+from django.db import models
+
+class MyModel(models.Model):
+    field1 = models.CharField(max_length=100)
+    field2 = models.TextField()
+
+    def __str__(self):
+        return self.field1
+```        
 
 **`tests.py`**:
    - **Công dụng**: Test
+   - **Cú pháp**: 
+```
+from django.test import TestCase
+from .models import MyModel
+
+class MyModelTestCase(TestCase):
+
+    def setUp(self):
+        MyModel.objects.create(field1='Test', field2='This is a test.')
+
+    def test_model_fields(self):
+        obj = MyModel.objects.get(field1='Test')
+        self.assertEqual(obj.field2, 'This is a test.')
+```       
 
 **`urls.py`**:
    - **Công dụng**: Định nghĩa các đường dẫn web (URL) và liên kết chúng với các chức năng xử lý trong `views.py`.
+   - **Cú pháp**: 
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('detail/<int:pk>/', views.detail, name='detail'),
+]
+```       
 
 **`views.py`**:
    - **Công dụng**: Xử lý yêu cầu HTTP và trả về các phản hồi HTTP.
+   - **Cú Pháp**: 
+```
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from .models import MyModel
+
+def index(request):
+    queryset = MyModel.objects.all()
+    return render(request, 'index.html', {'objects': queryset})
+
+def detail(request, pk):
+    obj = get_object_or_404(MyModel, pk=pk)
+    return render(request, 'detail.html', {'object': obj})
+```
