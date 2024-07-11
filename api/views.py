@@ -1,8 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from rest_framework import generics
+from .serializers import AccountSerializer
+from .models import Account
 # Create your views here.
 
+class AccountView(generics.ListAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
 
-def main(request):
-    return HttpResponse("Vcl")
+class AccountViewCreate(generics.CreateAPIView):
+    serializer_class = AccountSerializer
