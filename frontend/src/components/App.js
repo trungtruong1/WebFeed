@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { createRoot } from "react-dom/client";
-import SignIn from "./SignIn"; // Make sure the path is correct
+import LoginPage from '../pages/LoginPage';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>Vailon</h1>
+        <LoginPage />
       </div>
     );
   }
