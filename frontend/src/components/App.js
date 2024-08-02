@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { createRoot } from "react-dom/client";
-import LoginPage from '../pages/LoginPage';
+import Login from '../pages/Login';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <LoginPage />
+        <Login />
       </div>
     );
   }
