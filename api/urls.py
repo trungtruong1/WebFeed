@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     path('dcm/vailonthenhi', AccountView.as_view()),
     path('dcm/vailonthenhi/login', AccountViewCreate.as_view()),
-    path('auth/login/', views.get_user_access, name='get_user_access')
+    path('auth/login/', views.get_user_access, name='get_user_access'),
+    path('auth/register/', views.register_user, name='register_user')
 ]
